@@ -1,3 +1,0 @@
-#pragma once
-
-#cmakedefine _GIT_VERSION "@_GIT_VERSION@"
