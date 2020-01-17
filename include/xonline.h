@@ -22,12 +22,19 @@
 // *  All rights reserved
 // *
 // ******************************************************************
-#if 0 // XOnline.h isn't used, but below is still useful documentation.
+#ifndef XONLINE_H
+#define XONLINE_H
 
-#include "core\kernel\support\Emu.h"
-#include "core\hle\XAPI\Xapi.h" // For EMUPATCH
+#include "xapi.h" // For EMUPATCH
 
-namespace XTL {
+typedef struct _WSADATA {
+  // FIXME
+} WSADATA;
+
+
+typedef struct _SOCKET {
+  // FIXME
+} SOCKET;
 
 // ******************************************************************
 // * patch: WSAStartup
@@ -82,14 +89,14 @@ SOCKET WINAPI EMUPATCH(socket)
 int WINAPI EMUPATCH(connect)
 (
     SOCKET s,
-    const struct sockaddr FAR *name,
+    const struct sockaddr *name,
     int namelen
 );
 
 int WINAPI EMUPATCH(send)
 (
     SOCKET s,
-    const char FAR *buf,
+    const char *buf,
     int len,
     int flags
 );
@@ -97,7 +104,7 @@ int WINAPI EMUPATCH(send)
 int WINAPI EMUPATCH(recv)
 (
     SOCKET s,
-    char FAR *buf,
+    char *buf,
     int len,
     int flags
 );
@@ -106,7 +113,7 @@ int WINAPI EMUPATCH(recv)
 int WINAPI EMUPATCH(bind)
 (
     SOCKET s, 
-    const struct sockaddr FAR *name, 
+    const struct sockaddr *name, 
     int namelen
 );
 
@@ -120,9 +127,7 @@ int WINAPI EMUPATCH(ioctlsocket)
 (
     SOCKET s, 
     long cmd, 
-    u_long FAR *argp
+    u_long *argp
 );
-
-} // end of namespace XTL
 
 #endif

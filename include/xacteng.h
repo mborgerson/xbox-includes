@@ -25,29 +25,23 @@
 #ifndef EMUXACTENG_H
 #define EMUXACTENG_H
 
-#include "common\xbe\Xbe.h"
-#include "core\hle\XAPI\Xapi.h" // For EMUPATCH
+#include "xapi.h" // For EMUPATCH
 
 #undef FIELD_OFFSET     // prevent macro redefinition warnings
-#include <windows.h>
-
-#include <dsound.h>
-
-namespace XTL {
 
 // ******************************************************************
 // * XACT Interfaces
 // ******************************************************************
-struct X_XACTEngine;
-struct X_XACTWaveBank;
-struct X_XACTSoundBank;
-struct X_XACTSoundSource;
-struct X_XACTSoundCue;
+struct XACTEngine;
+struct XACTWaveBank;
+struct XACTSoundBank;
+struct XACTSoundSource;
+struct XACTSoundCue;
 
 // ******************************************************************
-// * X_XACT_RUNTIME_PARAMETERS
+// * XACT_RUNTIME_PARAMETERS
 // ******************************************************************
-struct X_XACT_RUNTIME_PARAMETERS 
+struct XACT_RUNTIME_PARAMETERS
 {
     DWORD	dwMax2DHwVoices;
     DWORD   dwMax3DHwVoices;
@@ -57,9 +51,9 @@ struct X_XACT_RUNTIME_PARAMETERS
 };
 
 // ******************************************************************
-// * X_XACT_WAVEBANK_STREAMING_PARAMETERS
+// * XACT_WAVEBANK_STREAMING_PARAMETERS
 // ******************************************************************
-struct X_XACT_WAVEBANK_STREAMING_PARAMETERS 
+struct XACT_WAVEBANK_STREAMING_PARAMETERS
 {
     HANDLE                      hFile;                          // file handle associated with wavebank data
     DWORD                       dwOffset;                       // offset within file of wavebank header
@@ -67,67 +61,67 @@ struct X_XACT_WAVEBANK_STREAMING_PARAMETERS
 };
 
 // ******************************************************************
-// * X_XACT_NOTIFICATION_DESCRIPTION
+// * XACT_NOTIFICATION_DESCRIPTION
 // ******************************************************************
-struct X_XACT_NOTIFICATION_DESCRIPTION
+struct XACT_NOTIFICATION_DESCRIPTION
 {
     WORD				wType;
     WORD				wFlags;
-    X_XACTSoundBank*	pSoundBank;
-    X_XACTWaveBank*		pWaveBank;
+    XACTSoundBank*	pSoundBank;
+    XACTWaveBank*		pWaveBank;
     DWORD				dwSoundCueIndex;
-    X_XACTSoundCue*		pSoundCue;
+    XACTSoundCue*		pSoundCue;
     PVOID				pvContext;
     HANDLE				hEvent;
 };
 
-typedef const X_XACT_NOTIFICATION_DESCRIPTION *PCXACT_NOTIFICATION_DESCRIPTION;
+typedef const XACT_NOTIFICATION_DESCRIPTION *PCXACT_NOTIFICATION_DESCRIPTION;
 
-//struct X_XACT_NOTIFICATION
+//struct XACT_NOTIFICATION
 //{
-//    X_XACT_NOTIFICATION_DESCRIPTION Header;
-//    X_XACT_NOTIFICATION_UNION Data;
+//    XACT_NOTIFICATION_DESCRIPTION Header;
+//    XACT_NOTIFICATION_UNION Data;
 //    REFERENCE_TIME rtTimeStamp;
 //};
 //
-//typedef const X_XACT_NOTIFICATION *PXACT_NOTIFICATION;
+//typedef const XACT_NOTIFICATION *PXACT_NOTIFICATION;
 
 // ******************************************************************
-// * X_XACTEngine
+// * XACTEngine
 // ******************************************************************
-struct X_XACTEngine
+struct XACTEngine
 {
 	// TODO: Fill this in?
 };
 
 // ******************************************************************
-// * X_XACTWaveBank
+// * XACTWaveBank
 // ******************************************************************
-struct X_XACTWaveBank
+struct XACTWaveBank
 {
 	// TODO: Fill this in?
 };
 
 // ******************************************************************
-// * X_XACTSoundBank
+// * XACTSoundBank
 // ******************************************************************
-struct X_XACTSoundBank
+struct XACTSoundBank
 {
 	// TODO: Fill this in?
 };
 
 // ******************************************************************
-// * X_XACTSoundSource
+// * XACTSoundSource
 // ******************************************************************
-struct X_XACTSoundSource
+struct XACTSoundSource
 {
 	// TODO: Fill this in?
 };
 
 // ******************************************************************
-// * X_XACTSoundCue
+// * XACTSoundCue
 // ******************************************************************
-struct X_XACTSoundCue
+struct XACTSoundCue
 {
 	// TODO: Fill this in?
 };
@@ -136,7 +130,7 @@ struct X_XACTSoundCue
 // ******************************************************************
 // * EmuXACTEngineCreate
 // ******************************************************************
-HRESULT WINAPI EMUPATCH(XACTEngineCreate)( X_XACT_RUNTIME_PARAMETERS* pParams, X_XACTEngine** ppEngine );
+HRESULT WINAPI EMUPATCH(XACTEngineCreate)( XACT_RUNTIME_PARAMETERS* pParams, XACTEngine** ppEngine );
 
 // ******************************************************************
 // * EmuXACTEngineDoWork
@@ -148,10 +142,10 @@ void WINAPI EMUPATCH(XACTEngineDoWork)();
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_RegisterWaveBank)
 (
-	X_XACTEngine*		pThis,
+	XACTEngine*		pThis,
 	LPVOID				pvData,
 	DWORD				dwSize,
-	X_XACTWaveBank**	ppWaveBank
+	XACTWaveBank**	ppWaveBank
 );
 
 // ******************************************************************
@@ -159,9 +153,9 @@ HRESULT WINAPI EMUPATCH(IXACTEngine_RegisterWaveBank)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_RegisterStreamedWaveBank)
 (
-	X_XACTEngine*							pThis,
-	X_XACT_WAVEBANK_STREAMING_PARAMETERS*	pParams,
-	X_XACTWaveBank**						ppWaveBank
+	XACTEngine*							pThis,
+	XACT_WAVEBANK_STREAMING_PARAMETERS*	pParams,
+	XACTWaveBank**						ppWaveBank
 );
 
 // ******************************************************************
@@ -169,10 +163,10 @@ HRESULT WINAPI EMUPATCH(IXACTEngine_RegisterStreamedWaveBank)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_CreateSoundBank)
 (
-	X_XACTEngine*		pThis,
+	XACTEngine*		pThis,
 	LPVOID				pvData,
 	DWORD				dwSize,
-	X_XACTSoundBank**	ppSoundBank
+	XACTSoundBank**	ppSoundBank
 );
 
 // ******************************************************************
@@ -180,7 +174,7 @@ HRESULT WINAPI EMUPATCH(IXACTEngine_CreateSoundBank)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_DownloadEffectsImage)
 (
-	X_XACTEngine*		pThis,
+	XACTEngine*		pThis,
 	PVOID				pvData,
 	DWORD				dwSize,
 	LPVOID				pEffectLoc,
@@ -192,9 +186,9 @@ HRESULT WINAPI EMUPATCH(IXACTEngine_DownloadEffectsImage)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_CreateSoundSource)
 (
-	X_XACTEngine*		pThis,
+	XACTEngine*		pThis,
 	DWORD				dwFlags,
-	X_XACTSoundSource** ppSoundSource
+	XACTSoundSource** ppSoundSource
 );
 
 // ******************************************************************
@@ -202,7 +196,7 @@ HRESULT WINAPI EMUPATCH(IXACTEngine_CreateSoundSource)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_EnableHeadphones)
 (
-	X_XACTEngine*		pThis,
+	XACTEngine*		pThis,
 	BOOL				fEnabled
 );
 
@@ -211,7 +205,7 @@ HRESULT WINAPI EMUPATCH(IXACTEngine_EnableHeadphones)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_SetListenerOrientation)
 (
-	X_XACTEngine*	pThis,
+	XACTEngine*	pThis,
 	float			xFront,
 	float			yFront,
 	float			zFront,
@@ -226,9 +220,9 @@ HRESULT WINAPI EMUPATCH(IXACTEngine_SetListenerOrientation)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_SetListenerPosition)
 (
-	X_XACTEngine*	pThis,
+	XACTEngine*	pThis,
 	float			x,
-	float			y, 
+	float			y,
 	float			z,
 	DWORD			dwApply
 );
@@ -238,9 +232,9 @@ HRESULT WINAPI EMUPATCH(IXACTEngine_SetListenerPosition)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_SetListenerVelocity)
 (
-	X_XACTEngine*	pThis,
+	XACTEngine*	pThis,
 	float			x,
-	float			y, 
+	float			y,
 	float			z,
 	DWORD			dwApply
 );
@@ -250,7 +244,7 @@ HRESULT WINAPI EMUPATCH(IXACTEngine_SetListenerVelocity)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_SetMasterVolume)
 (
-	X_XACTEngine*	pThis,
+	XACTEngine*	pThis,
     WORD			wCategory,
     LONG			lVolume
 );
@@ -258,14 +252,14 @@ HRESULT WINAPI EMUPATCH(IXACTEngine_SetMasterVolume)
 // ******************************************************************
 // * EmuIXACTEngine_CommitDeferredSettings
 // ******************************************************************
-HRESULT WINAPI EMUPATCH(IXACTEngine_CommitDeferredSettings)(X_XACTEngine* pThis);
+HRESULT WINAPI EMUPATCH(IXACTEngine_CommitDeferredSettings)(XACTEngine* pThis);
 
 // ******************************************************************
 // * EmuIXACTSoundBank_GetSoundCueIndexFromFriendlyName
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTSoundBank_GetSoundCueIndexFromFriendlyName)
 (
-	X_XACTEngine*		pThis,
+	XACTEngine*		pThis,
 	PCSTR				pFriendlyName,
 	DWORD*				pdwSoundCueIndex
 );
@@ -275,11 +269,11 @@ HRESULT WINAPI EMUPATCH(IXACTSoundBank_GetSoundCueIndexFromFriendlyName)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTSoundBank_Play)
 (
-	X_XACTSoundBank*	pThis,
+	XACTSoundBank*	pThis,
 	DWORD				dwSoundCueIndex,
-	X_XACTSoundSource*	pSoundSource,
+	XACTSoundSource*	pSoundSource,
 	DWORD				dwFlags,
-	X_XACTSoundCue**	ppSoundCue
+	XACTSoundCue**	ppSoundCue
 );
 
 // ******************************************************************
@@ -287,10 +281,10 @@ HRESULT WINAPI EMUPATCH(IXACTSoundBank_Play)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTSoundBank_Stop)
 (
-	X_XACTSoundBank*	pThis,
+	XACTSoundBank*	pThis,
 	DWORD				dwSoundCueIndex,
 	DWORD				dwFlags,
-	X_XACTSoundCue*		pSoundCue
+	XACTSoundCue*		pSoundCue
 );
 
 // ******************************************************************
@@ -298,7 +292,7 @@ HRESULT WINAPI EMUPATCH(IXACTSoundBank_Stop)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTSoundSource_SetPosition)
 (
-	X_XACTSoundSource*	pThis,
+	XACTSoundSource*	pThis,
     FLOAT				x,
     FLOAT				y,
     FLOAT				z,
@@ -310,7 +304,7 @@ HRESULT WINAPI EMUPATCH(IXACTSoundSource_SetPosition)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTSoundSource_SetVelocity)
 (
-	X_XACTSoundSource*	pThis,
+	XACTSoundSource*	pThis,
     FLOAT				x,
     FLOAT				y,
     FLOAT				z,
@@ -322,7 +316,7 @@ HRESULT WINAPI EMUPATCH(IXACTSoundSource_SetVelocity)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_RegisterNotification)
 (
-	X_XACTEngine*					pThis,
+	XACTEngine*					pThis,
     PCXACT_NOTIFICATION_DESCRIPTION pNotificationDesc
 );
 
@@ -331,7 +325,7 @@ HRESULT WINAPI EMUPATCH(IXACTEngine_RegisterNotification)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_GetNotification)
 (
-	X_XACTEngine*					pThis,
+	XACTEngine*					pThis,
     PCXACT_NOTIFICATION_DESCRIPTION pNotificationDesc,
     LPVOID						    pNotification
 );
@@ -341,10 +335,8 @@ HRESULT WINAPI EMUPATCH(IXACTEngine_GetNotification)
 // ******************************************************************
 HRESULT WINAPI EMUPATCH(IXACTEngine_UnRegisterWaveBank)
 (
-	X_XACTEngine*	pThis,
-    X_XACTWaveBank*	pWaveBank
+	XACTEngine*	pThis,
+    XACTWaveBank*	pWaveBank
 );
-
-} // end of namespace XTL
 
 #endif

@@ -25,9 +25,8 @@
 #ifndef XGRAPHIC_H
 #define XGRAPHIC_H
 
-#include "core\hle\D3D8\XbD3D8Types.h"
-
-namespace XTL {
+#include "xapi.h"
+#include "d3d8types.h"
 
 typedef struct _XGPOINT3D
 {
@@ -42,7 +41,7 @@ XGPOINT3D;
 // ******************************************************************
 PVOID WINAPI EMUPATCH(XGIsSwizzledFormat)
 (
-    X_D3DFORMAT     Format
+    D3DFORMAT       Format
 );
 
 #if 0 // Leave unpatched
@@ -98,9 +97,9 @@ VOID	WINAPI EMUPATCH(XGSetTextureHeader)
 	UINT			Height,
 	UINT			Levels,
 	DWORD			Usage,
-	X_D3DFORMAT		Format,
+	D3DFORMAT  		Format,
 	D3DPOOL			Pool,
-	X_D3DTexture*	pTexture,
+	D3DTexture  *	pTexture,
 	UINT			Data,
 	UINT			Pitch
 );
@@ -114,7 +113,5 @@ HRESULT WINAPI EMUPATCH(XFONT_OpenBitmapFontFromMemory)
 	unsigned		uFontDataSize,
 	void			**ppFont
 );
-
-} // end of namespace XTL
 
 #endif

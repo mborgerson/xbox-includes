@@ -64,9 +64,13 @@ extern "C"
 // ******************************************************************
 // * VOID
 // ******************************************************************
+#define VOID void
 #ifndef VOID
 	typedef void                VOID;
 #endif
+
+#define __int64 long long
+#define __int32 int
 
 // ******************************************************************
 // * Basic types
@@ -85,6 +89,7 @@ typedef unsigned long       SIZE_T, *PSIZE_T;
 typedef unsigned long       ACCESS_MASK, *PACCESS_MASK;
 typedef unsigned long       PHYSICAL_ADDRESS;
 typedef int                 INT;
+typedef unsigned int        UINT;
 typedef long                INT_PTR;
 typedef signed __int64      LONGLONG;
 typedef unsigned __int64    ULONGLONG;
@@ -97,6 +102,8 @@ typedef unsigned __int64    QUAD; // 8 byte aligned 8 byte long
 typedef CHAR               *PCHAR;
 typedef char               *PSZ;
 typedef CHAR               *PCSZ;
+typedef const char         *LPCSTR;
+typedef const char         *PCSTR;
 typedef BYTE               *PBYTE;
 typedef BOOLEAN            *PBOOLEAN;
 typedef UCHAR              *PUCHAR;
@@ -107,6 +114,7 @@ typedef ACCESS_MASK        *PACCESS_MASK;
 typedef LONG               *PLONG;
 typedef long               *PINT_PTR;
 typedef VOID               *PVOID, *LPVOID;
+typedef const void         *LPCVOID;
 typedef void               *HANDLE;
 typedef HANDLE             *PHANDLE;
 
@@ -656,7 +664,7 @@ typedef struct _EXCEPTION_RECORD
 {
 	DWORD ExceptionCode;
 	DWORD ExceptionFlags;
-	_EXCEPTION_RECORD *ExceptionRecord;
+	// _EXCEPTION_RECORD *ExceptionRecord;
 	VOID *ExceptionAddress;
 	DWORD NumberParameters;
 	ULONG_PTR ExceptionInformation[EXCEPTION_MAXIMUM_PARAMETERS];
@@ -2405,6 +2413,7 @@ INLINE static ULONG READ_REGISTER_ULONG(PULONG Address)
     return *(volatile ULONG *)Address;
 }
 
+#if 0
 // ******************************************************************
 // * WRITE_REGISTER_UCHAR
 // ******************************************************************
@@ -2464,6 +2473,7 @@ static VOID WRITE_REGISTER_ULONG(PVOID Address, ULONG Value)
         lock or Address, edx
     };
 }
+#endif
 
 // ******************************************************************
 // * SCSI_PASS_THROUGH_DIRECT

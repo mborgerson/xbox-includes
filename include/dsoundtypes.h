@@ -26,19 +26,16 @@
 #ifndef XBDSOUNDTYPES_H
 #define XBDSOUNDTYPES_H
 
-namespace XTL {
-
-#include <dsound.h> // TODO: FIXME after global namespace XTL issue is resolved.
 // TODO: Port PC dsound.h to xbox edition here base on previous research.
 // TODO: Also need to use fixed size to able support cross-platform without extra work.
 //       Such as uint32_t, uint16_t, etc.
 
-#define WAVE_FORMAT_XBOX_ADPCM 0x0069
+#define WAVE_FORMAT_XBOADPCM 0x0069
 
 // Xbox SGE Memory layout
-#define                             XTL_DS_SGE_COUNT_MAX 2047
-#define                             XTL_DS_SGE_PAGE_MAX (4 * ONE_KB)
-#define                             XTL_DS_SGE_SIZE_MAX (XTL_DS_SGE_COUNT_MAX * XTL_DS_SGE_PAGE_MAX)
+#define XTL_DS_SGE_COUNT_MAX 2047
+#define XTL_DS_SGE_PAGE_MAX (4 * ONE_KB)
+#define XTL_DS_SGE_SIZE_MAX (XTL_DS_SGE_COUNT_MAX * XTL_DS_SGE_PAGE_MAX)
 
 // XDSMIXBIN Flags
 #define XDSMIXBIN_FRONT_LEFT        0
@@ -51,60 +48,60 @@ namespace XTL {
 // Other flags are used 
 
 // ******************************************************************
-// * X_DSMIXBINVOLUMEPAIR
+// * DSMIXBINVOLUMEPAIR
 // ******************************************************************
 typedef struct _XDSMIXBINVOLUMEPAIR {
     DWORD       dwMixBin;
     LONG        lVolume;
-} X_DSMIXBINVOLUMEPAIR, *X_LPDSMIXBINVOLUMEPAIR;
+} DSMIXBINVOLUMEPAIR, *LPDSMIXBINVOLUMEPAIR;
 
 // ******************************************************************
-// * X_DSMIXBINS
+// * DSMIXBINS
 // ******************************************************************
 typedef struct _XDSMIXBINS {
     DWORD                       dwCount;
-    X_LPDSMIXBINVOLUMEPAIR     lpMixBinVolumePairs;
-} X_DSMIXBINS, *X_LPDSMIXBINS;
+    LPDSMIXBINVOLUMEPAIR     lpMixBinVolumePairs;
+} DSMIXBINS, *LPDSMIXBINS;
 
 // EmuIDirectSoundBuffer_Play flags
-#define X_DSBPLAY_LOOPING       0x00000001
-#define X_DSBPLAY_FROMSTART     0x00000002
-#define X_DSBPLAY_SYNCHPLAYBACK 0x00000004
+#define DSBPLAY_LOOPING       0x00000001
+#define DSBPLAY_FROMSTART     0x00000002
+#define DSBPLAY_SYNCHPLAYBACK 0x00000004
 
 // EmuIDirectSoundBuffer_Pause flags
-#define X_DSBPAUSE_RESUME             0x00000000
-#define X_DSBPAUSE_PAUSE              0x00000001
-#define X_DSBPAUSE_SYNCHPLAYBACK      0x00000002
+#define DSBPAUSE_RESUME             0x00000000
+#define DSBPAUSE_PAUSE              0x00000001
+#define DSBPAUSE_SYNCHPLAYBACK      0x00000002
 
 // EmuIDirectSoundStream_Pause flags
-#define X_DSSPAUSE_RESUME             0x00000000
-#define X_DSSPAUSE_PAUSE              0x00000001
-#define X_DSSPAUSE_SYNCHPLAYBACK      0x00000002
-#define X_DSSPAUSE_PAUSENOACTIVATE    0x00000003
+#define DSSPAUSE_RESUME             0x00000000
+#define DSSPAUSE_PAUSE              0x00000001
+#define DSSPAUSE_SYNCHPLAYBACK      0x00000002
+#define DSSPAUSE_PAUSENOACTIVATE    0x00000003
 
 // EmuIDirectSoundStream_FlushEx flags
-#define X_DSSFLUSHEX_IMMEDIATE        0x00000000
-#define X_DSSFLUSHEX_ASYNC            0x00000001
-#define X_DSSFLUSHEX_ENVELOPE         0x00000002
-#define X_DSSFLUSHEX_ENVELOPE2        0x00000004
+#define DSSFLUSHEX_IMMEDIATE        0x00000000
+#define DSSFLUSHEX_ASYNC            0x00000001
+#define DSSFLUSHEX_ENVELOPE         0x00000002
+#define DSSFLUSHEX_ENVELOPE2        0x00000004
 
 // EmuIDirectSoundStream_GetStatus flags
-#define X_DSSSTATUS_READY             0x00000001
-#define X_DSSSTATUS_PLAYING           0x00010000
-#define X_DSSSTATUS_PAUSED            0x00020000
-#define X_DSSSTATUS_STARVED           0x00040000
-#define X_DSSSTATUS_ENVELOPECOMPLETE  0x00080000
+#define DSSSTATUS_READY             0x00000001
+#define DSSSTATUS_PLAYING           0x00010000
+#define DSSSTATUS_PAUSED            0x00020000
+#define DSSSTATUS_STARVED           0x00040000
+#define DSSSTATUS_ENVELOPECOMPLETE  0x00080000
 
 // EmuIDirectSoundBuffer_GetStatus flags
-#define X_DSBSTATUS_PLAYING           0x00000001
-#define X_DSBSTATUS_PAUSED            0x00000002
-#define X_DSBSTATUS_LOOPING           0x00000004
+#define DSBSTATUS_PLAYING           0x00000001
+#define DSBSTATUS_PAUSED            0x00000002
+#define DSBSTATUS_LOOPING           0x00000004
 
 // EmuIDirectSoundBuffer_StopEx flags
-#define X_DSBSTOPEX_IMMEDIATE         0x00000000
-#define X_DSBSTOPEX_ENVELOPE          0x00000001
-#define X_DSBSTOPEX_RELEASEWAVEFORM   0x00000002
-#define X_DSBSTOPEX_ALL               (X_DSBSTOPEX_ENVELOPE | X_DSBSTOPEX_RELEASEWAVEFORM)
+#define DSBSTOPEX_IMMEDIATE         0x00000000
+#define DSBSTOPEX_ENVELOPE          0x00000001
+#define DSBSTOPEX_RELEASEWAVEFORM   0x00000002
+#define DSBSTOPEX_ALL               (DSBSTOPEX_ENVELOPE | DSBSTOPEX_RELEASEWAVEFORM)
 
 // Generic frequency range
 #define XTL_DSXFREQUENCY_ORIGINAL        0x00000000
@@ -122,22 +119,22 @@ typedef struct _XDSMIXBINS {
 #define XTL_DSBCAPS_FXIN2                0x00100000
 
 // ******************************************************************
-// * X_DSBUFFERDESC
+// * DSBUFFERDESC
 // ******************************************************************
-struct X_DSBUFFERDESC
+struct DSBUFFERDESC
 {
     DWORD           dwSize;
     DWORD           dwFlags;
     DWORD           dwBufferBytes;
     LPWAVEFORMATEX  lpwfxFormat;
-    X_LPDSMIXBINS   lpMixBinsOutput;
+    LPDSMIXBINS   lpMixBinsOutput;
     DWORD           dwInputMixBin;
 };
 
 // ******************************************************************
-// * X_DSENVELOPEDESC
+// * DSENVELOPEDESC
 // ******************************************************************
-struct X_DSENVOLOPEDESC
+struct DSENVOLOPEDESC
 {
     DWORD           dwEnvelopGenerator;
     DWORD           dwMode;
@@ -162,16 +159,16 @@ struct X_DSENVOLOPEDESC
 typedef VOID(CALLBACK *LPFNXMOCALLBACK)(LPVOID pStreamContext, LPVOID pPacketContext, DWORD dwStatus);
 
 // ******************************************************************
-// * X_DSSTREAMDESC
+// * DSSTREAMDESC
 // ******************************************************************
-struct X_DSSTREAMDESC
+struct DSSTREAMDESC
 {
     DWORD                       dwFlags;
     DWORD                       dwMaxAttachedPackets;
     LPWAVEFORMATEX              lpwfxFormat;
     LPFNXMOCALLBACK             lpfnCallback;
     LPVOID                      lpvContext;
-    X_LPDSMIXBINS               lpMixBinsOutput;
+    LPDSMIXBINS               lpMixBinsOutput;
 };
 
 // ******************************************************************
@@ -223,16 +220,16 @@ XMEDIAINFO, *PXEIDIAINFO, *LPXMEDIAINFO;
 #define XMO_STREAMF_MASK                        0x0000001F
 
 // ******************************************************************
-// * X_DSFILTERDESC
+// * DSFILTERDESC
 // ******************************************************************
-struct X_DSFILTERDESC
+struct DSFILTERDESC
 {
     DWORD dwMode;
     DWORD dwQCoefficient;
     DWORD adwCoefficients[4];
 };
 
-// X_DSFILTERDESC modes
+// DSFILTERDESC modes
 #define DSFILTER_MODE_BYPASS        0x00000000      // The filter is bypassed
 #define DSFILTER_MODE_DLS2          0x00000001      // DLS2 mode
 #define DSFILTER_MODE_PARAMEQ       0x00000002      // Parametric equalizer mode
@@ -255,7 +252,7 @@ DSLFODESC, *LPCDSLFODESC;
 // ******************************************************************
 // * XBOXADPCMWAVEFORMAT
 // ******************************************************************
-typedef struct xbox_adpcmwaveformat_tag
+typedef struct xboadpcmwaveformat_tag
 {
     WAVEFORMATEX    wfx;                    // WAVEFORMATEX data
     WORD            wSamplesPerBlock;       // Number of samples per encoded block.  It must be 64.
@@ -265,9 +262,9 @@ XBOXADPCMWAVEFORMAT, *PXBOXADPCMWAVEFORMAT, *LPXBOXADPCMWAVEFORMAT;
 typedef const XBOXADPCMWAVEFORMAT *LPCXBOXADPCMWAVEFORMAT;
 
 // ******************************************************************
-// * X_DSOUTPUTLEVELS
+// * DSOUTPUTLEVELS
 // ******************************************************************
-struct X_DSOUTPUTLEVELS
+struct DSOUTPUTLEVELS
 {
     DWORD dwAnalogLeftTotalPeak;    // analog peak
     DWORD dwAnalogRightTotalPeak;
@@ -288,9 +285,9 @@ struct X_DSOUTPUTLEVELS
 };
 
 // ******************************************************************
-// * X_DSCAPS
+// * DSCAPS
 // ******************************************************************
-struct X_DSCAPS
+struct DSCAPS
 {                                                       
     DWORD dwFree2DBuffers;
     DWORD dwFree3DBuffers;
@@ -298,19 +295,19 @@ struct X_DSCAPS
     DWORD dwMemoryAllocated;
 };
 
-#define X_DSSPEAKER_STEREO          0x00000000
-#define X_DSSPEAKER_MONO            0x00000001
-#define X_DSSPEAKER_SURROUND        0x00000002
-#define X_DSSPEAKER_ENABLE_AC3      0x00010000
-#define X_DSSPEAKER_ENABLE_DTS      0x00020000
+#define DSSPEAKER_STEREO          0x00000000
+#define DSSPEAKER_MONO            0x00000001
+#define DSSPEAKER_SURROUND        0x00000002
+#define DSSPEAKER_ENABLE_AC3      0x00010000
+#define DSSPEAKER_ENABLE_DTS      0x00020000
 
-struct X_DS3DBUFFER {
+struct DS3DBUFFER {
     DWORD dwSize;
-    D3DVECTOR vPosition;
-    D3DVECTOR vVelocity;
+    DS3DVECTOR vPosition;
+    DS3DVECTOR vVelocity;
     DWORD dwInsideConeAngle;
     DWORD  dwOutsideConeAngle;
-    D3DVECTOR vConeOrientation;
+    DS3DVECTOR vConeOrientation;
     LONG lConeOutsideVolume;
     FLOAT flMinDistance;
     FLOAT flMaxDistance;
@@ -320,7 +317,7 @@ struct X_DS3DBUFFER {
     FLOAT flDopplerFactor;
 };
 
-struct X_DSI3DL2LISTENER {
+struct DSI3DL2LISTENER {
     LONG lRoom;
     LONG lRoomHF;
     FLOAT flRoomRolloffFactor;
@@ -335,32 +332,32 @@ struct X_DSI3DL2LISTENER {
     FLOAT flHFReference;
 };
 
-struct X_DSI3DL2OBSTRUCTION {
+struct DSI3DL2OBSTRUCTION {
     LONG            lHFLevel;
     FLOAT           flLFRatio;
 };
 
-struct X_DSI3DL2OCCLUSION {
+struct DSI3DL2OCCLUSION {
     LONG            lHFLevel;
     FLOAT           flLFRatio;
 };
 
-struct X_DSI3DL2BUFFER {
+struct DSI3DL2BUFFER {
     LONG lDirect;
     LONG lDirectHF;
     LONG lRoom;
     LONG lRoomHF;
     FLOAT flRoomRolloffFactor;
-    X_DSI3DL2OBSTRUCTION Obstruction;
-    X_DSI3DL2OCCLUSION Occlusion;
+    DSI3DL2OBSTRUCTION Obstruction;
+    DSI3DL2OCCLUSION Occlusion;
 };
 
 typedef struct IDirectSoundStream IDirectSoundStream;
 typedef IDirectSoundStream *LPDIRECTSOUNDSTREAM;
 
-struct X_DSVOICEPROPS {
+struct DSVOICEPROPS {
     DWORD dwMixBinCount;
-    X_DSMIXBINVOLUMEPAIR MixBinVolumePairs[8];
+    DSMIXBINVOLUMEPAIR MixBinVolumePairs[8];
     LONG lPitch;
     LONG l3DDistanceVolume;
     LONG l3DConeVolume;
@@ -368,7 +365,5 @@ struct X_DSVOICEPROPS {
     LONG lI3DL2DirectVolume;
     LONG lI3DL2RoomVolume;
 };
-
-} // end of namespace XTL
 
 #endif

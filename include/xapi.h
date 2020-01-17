@@ -25,8 +25,6 @@
 #ifndef XAPI_H
 #define XAPI_H
 
-namespace XTL {
-
 // ******************************************************************
 // * calling conventions
 // ******************************************************************
@@ -49,7 +47,8 @@ typedef unsigned long       SIZE_T, *PSIZE_T;
 typedef unsigned long       ACCESS_MASK, *PACCESS_MASK;
 typedef unsigned long       PHYSICAL_ADDRESS;
 typedef long                INT_PTR;
-typedef unsigned __int64    ULONGLONG;
+
+typedef unsigned long u_long; // xonline.h
 
 // xapi
 typedef int                 BOOL;
@@ -70,8 +69,8 @@ typedef USHORT             *PUSHORT;
 typedef ULONG              *PULONG;
 typedef DWORD              *LPDWORD;
 typedef ACCESS_MASK        *PACCESS_MASK;
-typedef LONG               *LONG_PTR;
-typedef ULONG              *ULONG_PTR;
+// typedef LONG               *LONG_PTR; // fixme: also defined in xboxkrnl.h
+// typedef ULONG              *ULONG_PTR;
 typedef INT_PTR            *PINT_PTR;
 
 #ifndef VOID
@@ -81,14 +80,60 @@ typedef VOID               *PVOID, *LPVOID;
 typedef void               *HANDLE;
 typedef HANDLE             *PHANDLE;
 
+// FIXME
+// https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid
+typedef struct _GUID {
+  unsigned long  Data1;
+  unsigned short Data2;
+  unsigned short Data3;
+  unsigned char  Data4[8];
+} GUID;
+
+// Missing types
+typedef float FLOAT;
+typedef unsigned int MMRESULT;
+typedef WORD *PWORD;
+typedef void *LPFIBER_START_ROUTINE;
+typedef void *PAPCFUNC;
+typedef void *LPTIMECALLBACK;
+typedef void *LPOVERLAPPED_COMPLETION_ROUTINE;
+typedef HANDLE HWND; // d3d8
+typedef unsigned int WINBOOL; // wine
+
+// xfile.h
+typedef struct _OVERLAPPED {
+    uint32_t Internal;
+    uint32_t InternalHigh;
+    uint32_t Offset;
+    uint32_t OffsetHigh;
+    HANDLE   hEvent;
+} OVERLAPPED, *LPOVERLAPPED;
+
+
+typedef struct _POINT {
+    LONG x1;
+    LONG y1;
+} POINT;
+
+typedef struct _RECT {
+    LONG x1;
+    LONG y1;
+    LONG x2;
+    LONG y2;
+} RECT;
+
+
 // ******************************************************************
 // * documentation purposes only
 // ******************************************************************
+#ifndef EXPORTNUM
 #define EXPORTNUM(a)
+#endif
 #define UNALIGNED
 #define OPTIONAL
 #define IN
 #define OUT
+#define CALLBACK
 
 // ******************************************************************
 // * LPSECURITY_ATTRIBUTES
@@ -222,7 +267,7 @@ XINPUT_RUMBLE, *PXINPUT_RUMBLE;
 // ******************************************************************
 // * XINPUT_CAPABILITIES
 // ******************************************************************
-#include "AlignPrefix1.h"
+#pragma pack(1)
 typedef struct _XINPUT_CAPABILITIES
 {
     BYTE SubType;
@@ -240,8 +285,8 @@ typedef struct _XINPUT_CAPABILITIES
     }
     Out;
 }
-#include "AlignPosfix1.h"
 XINPUT_CAPABILITIES, *PXINPUT_CAPABILITIES;
+#pragma pack()
 
 // ******************************************************************
 // * Device XBOX Input Device Types 
@@ -285,7 +330,7 @@ XINPUT_STATE, *PXINPUT_STATE;
 // ******************************************************************
 // * XINPUT_FEEDBACK_HEADER
 // ******************************************************************
-#include "AlignPrefix1.h"
+#pragma pack(1)
 typedef struct _XINPUT_FEEDBACK_HEADER
 {
     DWORD             dwStatus;
@@ -294,8 +339,8 @@ typedef struct _XINPUT_FEEDBACK_HEADER
     PVOID             IoCompletedEvent; // PKEVENT really
     BYTE              Unknown2[50];
 }
-#include "AlignPosfix1.h"
 XINPUT_FEEDBACK_HEADER, *PXINPUT_FEEDBACK_HEADER;
+#pragma pack()
 
 // ******************************************************************
 // * XINPUT_FEEDBACK
@@ -374,7 +419,8 @@ LAUNCH_DATA, *PLAUNCH_DATA;
 // ******************************************************************
 // * macro: EMUPATCH - marker on patches on original Xbox functions
 // ******************************************************************
-#define EMUPATCH(Name) EmuPatch_##Name
+// #define EMUPATCH(Name) EmuPatch_##Name
+#define EMUPATCH(Name) Name
 
 // ******************************************************************
 // * patch: XFormatUtilityDrive
@@ -842,7 +888,5 @@ DWORD WINAPI EMUPATCH(XCalculateSignatureEnd)
 );
 //*/
 // +s
-
-} // end of namespace XTL
 
 #endif
