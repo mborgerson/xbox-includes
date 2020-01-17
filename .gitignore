@@ -1,0 +1,19 @@
+# Build folders
+[Bb]uild/
+[Bb]uild-*/
+
+# Visual Studio Cache
+.vs/
+
+# Generated files
+*.aps
+
+#Test files
+src/[Vv]ersion.h
+*.xbe
+
+# Last known git hash
+LAST_GIT_VERSION
+
+# git mergetool backup
+*.orig
