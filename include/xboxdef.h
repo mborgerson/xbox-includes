@@ -2,7 +2,7 @@
 #define __XBOXDEF_H__
 
 typedef const void *LPCVOID;
-typedef *PVOID, *LPVOID;
+typedef void *PVOID, *LPVOID;
 typedef PVOID HANDLE, *PHANDLE;
 
 typedef unsigned char BOOLEAN, *PBOOLEAN;
@@ -10,13 +10,13 @@ typedef unsigned char BOOLEAN, *PBOOLEAN;
 typedef signed char SCHAR, *PSCHAR;
 
 typedef char CHAR, *PCHAR, CCHAR, *LPCH, *PCH, OCHAR, *POCHAR;
-typedef short SHORT, *PSHORT;
+typedef short SHORT, *PSHORT, CSHORT;
 typedef int INT, *PINT, *LPINT;
 typedef long LONG, *PLONG, *LPLONG;
 typedef long long LONGLONG, *PLONGLONG;
 
 typedef unsigned char UCHAR, *PUCHAR;
-typedef unsigned short USHORT, *PUSHORT, CSHORT;
+typedef unsigned short USHORT, *PUSHORT;
 typedef unsigned short WORD, WCHAR, *PWSTR;
 typedef unsigned int UINT, *PUINT, *LPUINT;
 typedef unsigned long DWORD, *PDWORD, *LPDWORD;
@@ -25,15 +25,15 @@ typedef unsigned long long ULONGLONG;
 
 #define MAXDWORD 0xFFFFFFFFUL
 
-typedef unsigned int SIZE_T, *PSIZE_T;
+typedef LONG LONG_PTR;
+typedef ULONG ULONG_PTR;
+typedef ULONG_PTR DWORD_PTR;
+typedef ULONG_PTR SIZE_T, *PSIZE_T;
 
 typedef int BOOL, *PBOOL;
 typedef const char *PCSZ, *PCSTR, *LPCSTR;
 
-typedef ULONG ULONG_PTR;
-typedef LONG LONG_PTR;
 
-typedef ULONG_PTR DWORD_PTR;
 
 typedef struct _STRING {
     USHORT Length;

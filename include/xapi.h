@@ -61,7 +61,6 @@ typedef LONG                HRESULT;
 // * Pointer types
 // ******************************************************************
 typedef CHAR               *PCHAR;
-typedef CHAR               *PCSZ;
 typedef BYTE               *PBYTE;
 typedef BOOLEAN            *PBOOLEAN;
 typedef UCHAR              *PUCHAR;

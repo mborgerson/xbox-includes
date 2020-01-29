@@ -8,7 +8,7 @@
 
 #pragma once
 
-#include <xboxkrnl/xboxdef.h>
+#include "xboxdef.h"
 
 /* stop clang from crying */
 #pragma clang diagnostic push
@@ -26,12 +26,18 @@ extern "C"
 #define OUT
 #define UNALIGNED
 #define OPTIONAL
-#define XBAPI __declspec(dllimport)
-#define NTAPI __attribute__((__stdcall__))
-#define CDECL __attribute__((__cdecl__))
-#define FASTCALL __attribute__((fastcall))
-#define DECLSPEC_NORETURN __attribute__((noreturn))
-#define RESTRICTED_POINTER __restrict__
+// #define XBAPI __declspec(dllimport)
+#define XBAPI
+// #define NTAPI __attribute__((__stdcall__))
+#define NTAPI __stdcall
+// #define CDECL __attribute__((__cdecl__))
+#define CDECL __cdecl
+// #define FASTCALL __attribute__((fastcall))
+#define FASTCALL __fastcall
+// #define DECLSPEC_NORETURN __attribute__((noreturn))
+#define DECLSPEC_NORETURN
+// #define RESTRICTED_POINTER __restrict__
+#define RESTRICTED_POINTER
 
 #define CONST const
 #define VOID void
@@ -1856,7 +1862,7 @@ XBAPI XBOX_KEY_DATA XboxHDKey;
 
 XBAPI XBOX_KEY_DATA XboxEEPROMKey;
 
-XBAPI XBOX_KEY_DATA XboxAlternateSignatureKeys[];
+XBAPI XBOX_KEY_DATA *XboxAlternateSignatureKeys;
 
 XBAPI VOID NTAPI WRITE_PORT_BUFFER_USHORT
 (
@@ -3372,7 +3378,7 @@ XBAPI PVOID NTAPI MmAllocateContiguousMemory
 
 XBAPI PLAUNCH_DATA_PAGE LaunchDataPage;
 
-XBAPI volatile ULONG KiBugCheckData[];
+XBAPI volatile ULONG *KiBugCheckData;
 
 XBAPI NTSTATUS NTAPI KeWaitForSingleObject
 (
@@ -3395,7 +3401,7 @@ XBAPI NTSTATUS NTAPI KeWaitForMultipleObjects
     IN PKWAIT_BLOCK WaitBlockArray
 );
 
-XBAPI volatile CONST ULONG KeTimeIncrement;
+XBAPI volatile ULONG KeTimeIncrement;
 
 /**
  * Contains the number of milliseconds elapsed since the system was started.
