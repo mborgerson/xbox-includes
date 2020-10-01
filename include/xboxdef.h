@@ -32,6 +32,7 @@ typedef ULONG_PTR SIZE_T, *PSIZE_T;
 
 typedef int BOOL, *PBOOL;
 typedef const char *PCSZ, *PCSTR, *LPCSTR;
+typedef WCHAR *LPWSTR;
 
 
 
