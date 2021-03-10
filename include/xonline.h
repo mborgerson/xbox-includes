@@ -208,6 +208,31 @@ typedef struct _XONLINE_ATTRIBUTE_SPEC
     DWORD dwLength;
  } XONLINE_ATTRIBUTE_SPEC, *PXONLINE_ATTRIBUTE_SPEC;
 
+HRESULT WINAPI XOnlineMatchSessionCreate
+(
+    IN DWORD dwPublicCurrent,
+    IN DWORD dwPublicAvailable,
+    IN DWORD dwPrivateCurrent,
+    IN DWORD dwPrivateAvailable,
+    IN DWORD dwNumAttributes,
+    IN PXONLINE_ATTRIBUTE pAttributes,
+    IN HANDLE hWorkEvent,
+    OUT PXONLINETASK_HANDLE phTask
+);
+
+HRESULT WINAPI XOnlineMatchSessionUpdate
+(
+    IN XNKID SessionID,
+    IN DWORD dwPublicCurrent,
+    IN DWORD dwPublicAvailable,
+    IN DWORD dwPrivateCurrent,
+    IN DWORD dwPrivateAvailable,
+    IN DWORD dwNumAttributes,
+    IN PXONLINE_ATTRIBUTE pAttributes,
+    IN HANDLE hWorkEvent,
+    OUT PXONLINETASK_HANDLE phTask
+);
+
 HRESULT WINAPI XOnlineMatchSearch
 (
     IN DWORD dwProcedureIndex,
