@@ -176,8 +176,8 @@ struct host_voice_packet {
     XMEDIAPACKET xmp_data;
     PVOID   pBuffer_data;
     DWORD   rangeStart;
-    bool    isWritten;
-    bool    isPlayed;
+    BOOL    isWritten;
+    BOOL    isPlayed;
 };
 
 // ******************************************************************
