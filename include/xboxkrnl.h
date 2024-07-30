@@ -948,8 +948,8 @@ typedef enum _FIRMWARE_REENTRY
 typedef struct _XBEIMAGE_SECTION
 {
     ULONG SectionFlags;
-    ULONG virtualAddress;
-    ULONG VirtuaSize;
+    ULONG VirtualAddress;
+    ULONG VirtualSize;
     ULONG PointerToRawData;
     ULONG SizeOfRawData;
     PUCHAR SectionName;
